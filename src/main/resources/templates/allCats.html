@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All cats</title>
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: 1200px;
+            text-align: center;
+        }
+
+        /* CSS для таблицы */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(255, 255, 255);
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgb(222, 157, 124);
+        }
+
+        th {
+            background-color: rgba(255, 96, 0, 0.98);
+            color: rgb(255, 255, 255);
+        }
+
+        /* CSS для кнопок */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: rgb(232, 107, 33);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button-panel {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-panel form {
+            margin: 0 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+<h1>All Cats</h1>
+<div id="catList">
+    <form id="catForm" action="/deleteSelectedCats" method="post">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Breed</th>
+                <th>Description</th>
+                <th>Select</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="cat : ${cats}">
+                <td th:text="${cat.catId}"></td>
+                <td th:text="${cat.catName}"></td>
+                <td th:text="${cat.catAge}"></td>
+                <td th:text="${cat.catBreed}"></td>
+                <td th:text="${cat.catDescription}"></td>
+                <td>
+                    <input type="checkbox" name="selectedCats" th:value="${cat.catId}">
+                </td>
+                <td>
+                    <a th:href="@{/editCatForm/{catId}(catId=${cat.catId})}">Edit</a>
+                </td>
+            </tr>
+        </table>
+        <div class="button-panel">
+            <form id="deleteForm" action="/deleteSelectedCats" method="post">
+                <button class="button" type="button" onclick="deleteSelectedCats()">Delete Selected</button>
+            </form>
+            <form action="/toMain" method="post">
+                <button class="button" type="submit">To main page</button>
+            </form>
+            <form action="/addCat">
+                <button class="button" type="submit">Add new cat</button>
+            </form>
+            <form id="editForm" action="/editCat" method="get" style="display: none;">
+                <input type="hidden" id="editCatId" name="catId">
+                <button class="button" type="submit">Edit</button>
+            </form>
+        </div>
+    </form>
+</div>
+<script>
+    function deleteSelectedCats() {
+        var form = document.getElementById("catForm");
+        form.submit();
+    }
+</script>
+</body>
+</html>

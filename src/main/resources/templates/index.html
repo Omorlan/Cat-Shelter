@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: 1200px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: rgb(232, 107, 33);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<form action="/allCats">
+    <button class="button" type="submit">All cats</button>
+</form>
+<form action="/addCat">
+    <button class="button" type="submit">Add new cat</button>
+</form>
+<form action="/clearTable" method="post">
+    <button class="button" type="submit">Clear Cats Table</button>
+</form>
+</body>
+</html>

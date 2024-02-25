@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: 1200px;
+            text-align: center;
+        }
+
+        #header {
+            background-color: rgba(255, 96, 0, 0.98);
+            color: rgb(255, 255, 255);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #addForm {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: rgb(255, 255, 255);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: rgb(232, 107, 33);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .required-label {
+            color: red;
+        }
+
+        h1 {
+            color: white;
+            background-color: rgba(255, 96, 0, 0.8);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="catList">
+    <form id="catForm" action="/addCat" method="post">
+        <div id="addForm">
+            <h1>Add a New Cat</h1>
+            <label for="catName"><span class="required-label">*</span>Name:</label>
+            <input type="text" id="catName" name="catName" required><br><br>
+
+            <label for="catAge"><span class="required-label">*</span>Age:</label>
+            <input type="number" id="catAge" name="catAge" required><br><br>
+
+            <label for="catBreed"><span class="required-label">*</span>Breed:</label>
+            <input type="text" id="catBreed" name="catBreed" required><br><br>
+
+            <label for="catDescription"><span class="required-label">*</span>Description:</label><br>
+            <textarea id="catDescription" name="catDescription" required></textarea><br><br>
+
+            <input class="button" type="button" value="Add Cat" onclick="validateForm()">
+            <p id="errorMessage" class="error-message"></p>
+        </div>
+    </form>
+    <form action="/toMain" method="post">
+        <button class="button" type="submit">To main page</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        var catName = document.getElementById("catName").value;
+        var catAge = document.getElementById("catAge").value;
+        var catBreed = document.getElementById("catBreed").value;
+        var catDescription = document.getElementById("catDescription").value;
+        var errorMessage = document.getElementById("errorMessage");
+
+        if (catName === "" || catAge === "" || catBreed === "" || catDescription === "") {
+            errorMessage.innerHTML = "Please fill in all fields";
+            return;
+        }
+
+        errorMessage.innerHTML = "";
+        document.getElementById("catForm").submit();
+    }
+</script>
+</body>
+</html>
